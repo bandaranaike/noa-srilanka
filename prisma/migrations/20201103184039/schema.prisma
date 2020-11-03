@@ -1,0 +1,31 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "mysql"
+  url = "***"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Videos {
+  id         Int      @id @default(autoincrement())
+  created_at DateTime @default(now())
+  title      String
+  content    Json?
+  published  Boolean  @default(false)
+  author     Users    @relation(fields: [author_id], references: [id])
+  author_id  Int
+  thumbnail  String?
+  video_url  String?
+}
+
+model Users {
+  id       Int      @id @default(autoincrement())
+  email    String   @unique
+  name     String?
+  password String
+  Video    Videos[]
+}

@@ -1,65 +1,53 @@
 import Head from 'next/head'
-import styles from '../styles/Home.module.css'
 
-export default function Home() {
+/** @param {import('next').InferGetStaticPropsType<typeof getStaticProps> } props */
+export default function Home({ videos }) {
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+    <div>
+      <div className='home-slider'>
+        <div className='container mx-auto md:flex py-12'>
+          <div className='py-20'>
+            <div className='welcome text-2xl font-bold'>Welcome</div>
+            <h1>Nippon Origami Association - <span>Sri Lanka</span></h1>
+            <p>One beauty of origami that has been alive in the mind of one person over the countries and regions</p>
+          </div>
+          <div>
+            <img src='images/origami-blue-eagle.png' />
+          </div>
         </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
+      </div>
+      <div className='container mx-auto py-12'>
+        <ul className='grid grid-cols-3 gap-8'>
+          {videos.map(video => (
+            <li key={video.id} className='rounded-lg shadow-xl relative'> 
+              <img className='object-cover rounded-t-lg h-64 w-full' src={'/video-thumbs/' + video.thumbnail} />
+              <div className='p-6 pb-24'>
+                <div className='mb-3 theme-color'>YouTube</div>
+                <h3 className='mb-4'>{video.title}</h3>
+                <p className='text-gray-600'>{video.content}</p>
+                <div className='md:flex absolute bottom-0 pb-5'> 
+                  <img className='rounded-full border h-12 w-12 object-cover border-gray-400' src='/images/logo.jpg' />
+                  <div className='pl-4'>
+                    <div>NOA Sri lanka</div>
+                    <div className='text-sm text-gray-600'>{(new Date(video.created_at).toDateString())}</div>
+                  </div>
+                </div>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   )
+}
+
+
+export async function getStaticProps() {
+  const response = await fetch('http://localhost:3000/api/videos')
+  const videos = await response.json();
+  return {
+    props: {
+      videos,
+    }
+  }
 }
