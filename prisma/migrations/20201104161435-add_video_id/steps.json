@@ -113,7 +113,7 @@
       "tag": "CreateField",
       "model": "Videos",
       "field": "content",
-      "type": "String",
+      "type": "Json",
       "arity": "Optional"
     },
     {
@@ -212,6 +212,13 @@
       "tag": "CreateField",
       "model": "Videos",
       "field": "video_url",
+      "type": "String",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Videos",
+      "field": "video_id",
       "type": "String",
       "arity": "Optional"
     },

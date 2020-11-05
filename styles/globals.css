@@ -1,6 +1,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;700&display=swap');
 /* purgecss start ignore */
 @tailwind base;
 @tailwind components;
@@ -12,6 +12,7 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    font-weight: 300;
 }
 
 a {
@@ -26,9 +27,13 @@ a {
 h1, h2, h3{
   color: #374a5e;
   margin: 0;
-  font-family: Poppins, sans-serif;
   line-height: 1.2;
 }
+
+.poppins-font{
+  font-family: Poppins, sans-serif;
+}
+
 h3{
   font-size: 1.4rem;
 }
@@ -46,7 +51,7 @@ h3{
 }
 
 .theme-color{
-  color: #02567f;
+  color: #0b81bb;
 }
 
 .welcome{
@@ -59,4 +64,8 @@ h3{
   font-size: 1.2rem;
   font-weight: 400;
   line-height: 1.5;
+}
+
+.gray-light-text{
+  color: #686868;
 }
